@@ -3,33 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".MenuBottomSheetFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageButton
         android:id="@+id/buttonBack"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/arrow_left" />
+        android:contentDescription="@null"
+        android:src="@drawable/arrow_left">
+    </ImageButton>
+
     <TextView
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textColor="@color/start"
-        android:fontFamily="serif"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Booking" />
+        android:layout_marginTop="8dp"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="@string/booking"
+        android:textColor="#43A047"
+        android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/menuRecyclerView"
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>
