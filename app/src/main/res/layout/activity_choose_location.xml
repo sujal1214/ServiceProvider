@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChooseLocationActivity">
@@ -16,6 +17,7 @@
         android:fontFamily="serif"
         android:text="Designed  By \nSujal,Riya,Shruti"
         android:textAlignment="center"
+        android:textColor="@color/start"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
