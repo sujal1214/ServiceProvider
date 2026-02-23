@@ -14,6 +14,12 @@ class PayOutActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityPayOutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.backButtonPayout.setOnClickListener {
+            finish()
+        }
+
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

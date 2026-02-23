@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/backButtonPayout"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="32dp"
@@ -58,7 +58,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:paddingLeft="8dp"
-                android:text="Name" />
+                android:text="Name"
+                android:textColor="@color/black" />
 
             <EditText
 
@@ -67,9 +68,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif"
                 android:inputType="text"
-                android:text="Name" />
+                android:text="Name"
+                android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="16dp"
@@ -91,7 +93,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:paddingLeft="8dp"
-                android:text="Address" />
+                android:text="Address"
+                android:textColor="@color/black" />
 
             <EditText
 
@@ -102,9 +105,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif"
                 android:inputType="textMultiLine"
-                android:text="Name" />
+                android:text="Name"
+                android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="16dp"
@@ -126,7 +130,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:paddingLeft="8dp"
-                android:text="Phone" />
+                android:text="Phone"
+                android:textColor="@color/black" />
 
             <EditText
 
@@ -135,9 +140,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif"
                 android:inputType="text"
-                android:text="Name" />
+                android:text="Name"
+                android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="16dp"
@@ -159,7 +165,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:paddingLeft="8dp"
-                android:text="Payment Method" />
+                android:text="Payment Method"
+                android:textColor="@color/black" />
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -190,7 +197,8 @@
                 android:layout_weight="1"
                 android:fontFamily="serif"
                 android:paddingLeft="8dp"
-                android:text="Total Amount" />
+                android:text="Total Amount"
+                android:textColor="@color/black" />
 
             <EditText
 
