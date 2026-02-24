@@ -47,8 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:fontFamily="serif"
-        android:text="Designed  By \nSujal,Riya,Shruti"
+        android:text="Designed  By \nSujal"
         android:textAlignment="center"
+        android:textColor="@color/start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
