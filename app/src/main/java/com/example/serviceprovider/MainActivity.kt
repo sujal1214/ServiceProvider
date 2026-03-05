@@ -11,14 +11,19 @@ import com.example.serviceprovider.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navController = findNavController(R.id.nav_host_fragment)
+
         val bottomNav = binding.bottomNavigationView2
+
         bottomNav.setupWithNavController(navController)
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
@@ -26,11 +31,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         binding.notificationButton.setOnClickListener {
             val bottomSheetFragment = Notification_Bottom_Fragment()
             bottomSheetFragment.show(supportFragmentManager, "Test")
         }
     }
+
     //Sujal Shinde
     //Riya Vadekar
 }

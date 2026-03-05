@@ -1,60 +1,127 @@
 package com.example.serviceprovider.Fragment
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.serviceprovider.LoginActivity
 import com.example.serviceprovider.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var nameEdit: EditText
+    private lateinit var addressEdit: EditText
+    private lateinit var emailEdit: EditText
+    private lateinit var phoneEdit: EditText
+
+    private lateinit var editButton: Button
+    private lateinit var saveButton: Button
+    private lateinit var logoutButton: Button
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    ): View {
+
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        nameEdit = view.findViewById(R.id.nameEdit)
+        addressEdit = view.findViewById(R.id.addressEdit)
+        emailEdit = view.findViewById(R.id.emailEdit)
+        phoneEdit = view.findViewById(R.id.phoneEdit)
+
+        editButton = view.findViewById(R.id.editButton)
+        saveButton = view.findViewById(R.id.saveButton)
+        logoutButton = view.findViewById(R.id.logoutButton)
+
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+
+        loadProfile()
+
+        editButton.setOnClickListener {
+            enableEditing(true)
+            Toast.makeText(requireContext(),"Edit mode enabled",Toast.LENGTH_SHORT).show()
+        }
+
+        saveButton.setOnClickListener {
+            saveProfile()
+        }
+
+        logoutButton.setOnClickListener {
+            logoutUser()
+        }
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun enableEditing(enable: Boolean) {
+        nameEdit.isEnabled = enable
+        addressEdit.isEnabled = enable
+        phoneEdit.isEnabled = enable
+    }
+
+    private fun loadProfile() {
+
+        val user = auth.currentUser ?: return
+
+        emailEdit.setText(user.email)
+
+        db.collection("users")
+            .document(user.uid)
+            .get()
+            .addOnSuccessListener {
+
+                if (it.exists()) {
+                    nameEdit.setText(it.getString("name"))
+                    addressEdit.setText(it.getString("address"))
+                    phoneEdit.setText(it.getString("phone"))
                 }
             }
+    }
+
+    private fun saveProfile() {
+
+        val user = auth.currentUser ?: return
+
+        val userMap = hashMapOf(
+            "name" to nameEdit.text.toString(),
+            "address" to addressEdit.text.toString(),
+            "phone" to phoneEdit.text.toString(),
+            "email" to emailEdit.text.toString()
+        )
+
+        db.collection("users")
+            .document(user.uid)
+            .set(userMap)
+            .addOnSuccessListener {
+
+                Toast.makeText(
+                    requireContext(),
+                    "Profile Updated",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                enableEditing(false)
+            }
+    }
+
+    private fun logoutUser() {
+
+        FirebaseAuth.getInstance().signOut()
+
+        startActivity(Intent(requireContext(), LoginActivity::class.java))
+
+        requireActivity().finish()
     }
 }
