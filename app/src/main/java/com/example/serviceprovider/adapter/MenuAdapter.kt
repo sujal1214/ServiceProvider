@@ -2,22 +2,22 @@ package com.example.serviceprovider.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.example.serviceprovider.DetailsActivity2
 import com.example.serviceprovider.databinding.MenuItemBinding
+import com.example.serviceprovider.model.MenuItem
+import androidx.core.net.toUri
 
 class MenuAdapter(
-    private val menuServicesName:MutableList<String>,
-    private val menuServicePrice:MutableList<String>,
-    private val menuServiceImages:MutableList<Int>,
+    private val menuItems:List<MenuItem>,
     private val requireContext: Context
 ): RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
-
-    private val ItemClickListener : View.OnClickListener ?= null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -38,7 +38,7 @@ class MenuAdapter(
         holder.bind(position)
     }
 
-    override fun getItemCount(): Int = menuServicesName.size
+    override fun getItemCount(): Int = menuItems.size
 
     inner class MenuViewHolder(
         private val binding: MenuItemBinding
@@ -47,25 +47,39 @@ class MenuAdapter(
             binding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    ItemClickListener.onItemClick(position)
+                    openDetailsActivity(position)
                 }
-                // setOnClickListner to open details
-                val intent = Intent(requireContext, DetailsActivity2::class.java)
-                intent .putExtra("ServiceName",menuServicesName.get(position))
-                intent .putExtra("ServiceImage",menuServiceImages.get(position))
-                requireContext.startActivity(intent)
             }
         }
-        fun bind(position: Int) {
-            binding.apply {
-                menuServiceName.text = menuServicesName[position]
-                menuPrice.text = menuServicePrice[position]
-                menuImage.setImageResource(menuServiceImages[position])
 
+        //set data into recyclerview items name, price, image
+        fun bind(position: Int) {
+            val menuItem = menuItems[position]
+            binding.apply {
+                menuServiceName.text = menuItem.serviceName
+                menuPrice.text = menuItem.servicePrice
+                val uri = Uri.parse(menuItem.serviceImage)
+                Glide.with(requireContext).load(uri).into(menuImage)
             }
         }
 
     }
+
+    private fun openDetailsActivity(position: Int) {
+        val menuItem = menuItems[position]
+
+        //an Intent to open details activity and pass data
+        val  intent = Intent(requireContext, DetailsActivity2::class.java).apply{
+            putExtra("MenuItemName", menuItem.serviceName)
+            putExtra("MenuItemImage", menuItem.serviceImage)
+            putExtra("MenuItemDescription", menuItem.serviceDescription)
+            putExtra("MenuItemFacility", menuItem.serviceFacility)
+            putExtra("MenuItemPrice", menuItem.servicePrice)
+        }
+        //start the details activity
+        requireContext.startActivity(intent)
+    }
+
     private fun View.OnClickListener?.onItemClick(position: Int) {}
 }
 
