@@ -2,8 +2,9 @@ package com.example.serviceprovider.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.serialization.Serializable
 
-class OrderDetails(): Parcelable {
+class OrderDetails(): java.io.Serializable {
     var userUid : String?=null
     var userName : String?=null
     var serviceNames : MutableList<String>?=null
@@ -21,6 +22,17 @@ class OrderDetails(): Parcelable {
     constructor(parcel: Parcel) : this() {
         userUid = parcel.readString()
         userName = parcel.readString()
+        serviceNames = parcel.createStringArrayList()
+        serviceImages = parcel.createStringArrayList()
+        servicePrices = parcel.createStringArrayList()
+        serviceQuantities = mutableListOf<Int>().apply {
+            val list = parcel.readArrayList(Int::class.java.classLoader)
+            if (list != null) {
+                for (item in list) {
+                    if (item is Int) add(item)
+                }
+            }
+        }
         address = parcel.readString()
         totalPrice = parcel.readString()
         phoneNumber = parcel.readString()
@@ -60,9 +72,13 @@ class OrderDetails(): Parcelable {
         this.paymentReceived = b1
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+     fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(userUid)
         parcel.writeString(userName)
+        parcel.writeStringList(serviceNames)
+        parcel.writeStringList(serviceImages)
+        parcel.writeStringList(servicePrices)
+        parcel.writeList(serviceQuantities)
         parcel.writeString(address)
         parcel.writeString(totalPrice)
         parcel.writeString(phoneNumber)
@@ -72,7 +88,7 @@ class OrderDetails(): Parcelable {
         parcel.writeLong(currentTime)
     }
 
-    override fun describeContents(): Int {
+   fun describeContents(): Int {
         return 0
     }
 
