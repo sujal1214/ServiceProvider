@@ -1,45 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SignActivity">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/createAccountButton"
-        android:layout_width="152dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/greenbuttongradient"
-        android:fontFamily="serif"
-        android:text="Create Account"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googleButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/logo" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/facebookButton"
-        android:layout_width="152dp"
+    <TextView
+        android:id="@+id/textView13"
+        android:text="Service Provider"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:layout_constraintStart_toStartOf="@id/imageView3"
+        app:layout_constraintEnd_toEndOf="@id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:text="Provides Services, Available Locally"
+        app:layout_constraintTop_toBottomOf="@id/textView13"
+        app:layout_constraintStart_toStartOf="@id/textView13"
+        app:layout_constraintEnd_toEndOf="@id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:text="Sign Up Here"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/textView15"
+        app:layout_constraintStart_toStartOf="@id/textView15"
+        app:layout_constraintEnd_toEndOf="@id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="325dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/whitebutton"
-        android:drawableLeft="@drawable/facebook"
+        android:hint="Name"
+        android:drawableLeft="@drawable/user_plus"
         android:paddingLeft="15dp"
-        android:text="Facebook"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/googleButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        android:background="@drawable/edittextshape"
+        app:layout_constraintTop_toBottomOf="@id/textView14"
+        app:layout_constraintStart_toStartOf="@id/textView14"
+        app:layout_constraintEnd_toEndOf="@id/textView14"/>
 
+    <EditText
+        android:id="@+id/emailAddress"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:hint="Email"
+        android:drawableLeft="@drawable/mail"
+        android:paddingLeft="15dp"
+        android:background="@drawable/edittextshape"
+        app:layout_constraintTop_toBottomOf="@id/userName"
+        app:layout_constraintStart_toStartOf="@id/userName"
+        app:layout_constraintEnd_toEndOf="@id/userName"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:hint="Password"
+        android:drawableLeft="@drawable/lock"
+        android:paddingLeft="15dp"
+        android:background="@drawable/edittextshape"
+        app:layout_constraintTop_toBottomOf="@id/emailAddress"
+        app:layout_constraintStart_toStartOf="@id/emailAddress"
+        app:layout_constraintEnd_toEndOf="@id/emailAddress"/>
+
+    <!-- ✅ FIXED IDS -->
+    <TextView
+        android:id="@+id/textView16"
+        android:text="Or"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/textView17"
+        android:text="Sign Up With"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textView16"
+        app:layout_constraintStart_toStartOf="@id/textView16"
+        app:layout_constraintEnd_toEndOf="@id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- GOOGLE BUTTON -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/googleButton"
-        android:layout_width="152dp"
+        android:layout_width="325dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/whitebutton"
@@ -47,135 +117,31 @@
         android:paddingLeft="15dp"
         android:text="Google"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/facebookButton"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@id/textView17"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="35dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:text="Service Provider"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <EditText
-        android:id="@+id/userName"
-        android:layout_width="325dp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/createAccountButton"
+        android:layout_width="152dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edittextshape"
-        android:drawableLeft="@drawable/user_plus"
-        android:drawablePadding="15dp"
-        android:elevation="5dp"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="text"
-        android:paddingLeft="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView14"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-    <EditText
-        android:id="@+id/emailAddress"
-        android:layout_width="325dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittextshape"
-        android:drawableLeft="@drawable/mail"
-        android:drawablePadding="15dp"
-        android:elevation="5dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/userName"
-        app:layout_constraintStart_toStartOf="@+id/userName"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="325dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittextshape"
-        android:drawableLeft="@drawable/lock"
-        android:drawablePadding="15dp"
-        android:elevation="5dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/emailAddress"
-        app:layout_constraintStart_toStartOf="@+id/emailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="serif"
-        android:text="Sign Up Here"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView15"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:text="Provides Services, Available Locally"
-        app:layout_constraintEnd_toEndOf="@+id/textView13"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="serif"
-        android:text="Or"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/greenbuttongradient"
+        android:text="Create Account"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/googleButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:text="Sign Up With"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView16"
-        app:layout_constraintStart_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/alreadyhavebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
         android:text="Already Have An Account?"
+        app:layout_constraintTop_toBottomOf="@id/createAccountButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createAccountButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

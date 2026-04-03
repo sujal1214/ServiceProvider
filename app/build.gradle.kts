@@ -6,9 +6,9 @@ plugins {
 
 android {
     namespace = "com.example.serviceprovider"
-    compileSdk {
-        version = release(36)
-    }
+
+    // ✅ FIXED (THIS WAS WRONG BEFORE)
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.serviceprovider"
@@ -19,9 +19,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-buildFeatures{
-    viewBinding = true
-}
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -31,16 +33,19 @@ buildFeatures{
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -51,17 +56,24 @@ dependencies {
     implementation(libs.androidx.fragment)
     implementation(libs.androidx.cardview)
     implementation(libs.androidx.recyclerview)
+
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.storage)
+
+    // ✅ IMPORTANT (GOOGLE LOGIN FIX)
+    implementation("com.google.android.gms:play-services-auth:21.0.1")
+
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
-    implementation(libs.firebase.database)
-    implementation(libs.firebase.storage)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
 
-    // For Glide
+    // Glide
     implementation("com.github.bumptech.glide:glide:5.0.5")
 }
