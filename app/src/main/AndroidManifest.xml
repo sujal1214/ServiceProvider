@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceProvider">
         <activity
+            android:name=".recentOrderItems"
+            android:exported="false" />
+        <activity
             android:name=".DetailsActivity2"
             android:exported="false" />
         <activity
@@ -41,9 +44,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>
