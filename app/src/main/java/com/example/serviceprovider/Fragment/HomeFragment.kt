@@ -1,7 +1,7 @@
 package com.example.serviceprovider.Fragment
 
 import android.os.Bundle
-import android.text.method.SingleLineTransformationMethod
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +13,14 @@ import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.serviceprovider.MenuBottomSheetFragment
 import com.example.serviceprovider.R
-import com.example.serviceprovider.adapter.PopularAdapter
-import com.example.serviceprovider.databinding.ActivityChooseLocationBinding
+import com.example.serviceprovider.adapter.MenuAdapter
 import com.example.serviceprovider.databinding.FragmentHomeBinding
+import com.example.serviceprovider.model.MenuItem
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +29,8 @@ private const val ARG_PARAM2 = "param2"
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-
+    private lateinit var database : FirebaseDatabase
+    private lateinit var menuItems : MutableList<MenuItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +47,52 @@ class HomeFragment : Fragment() {
             val bottomSheetDialog = MenuBottomSheetFragment()
             bottomSheetDialog.show(parentFragmentManager,"Test")
         }
+        //retrieve PopularMenuItem
+        reteriveAndDisplayPopularItems()
         return binding.root
+    }
 
+    private fun reteriveAndDisplayPopularItems() {
+        //get reference to the database
+        database = FirebaseDatabase.getInstance()
+        val serviceRef : DatabaseReference = database.reference.child("menu")
+        menuItems = mutableListOf()
 
+        //reterive menu items from fatabase
+        serviceRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                for (serviceSnapshot in snapshot.children) {
+                    val menuItem = serviceSnapshot.getValue(MenuItem::class.java)
+                    menuItem?.let { menuItems.add(it) }
+                }
+                // display a random popular items
+                randomPopularItems()
+
+                // Optional: Log or update UI
+                Log.d("DATA", "Items fetched: ${menuItems.size}")
+
+            }
+
+            private fun randomPopularItems() {
+                // create a shuffled list of menu items
+                val index = menuItems.indices.toList().shuffled()
+                val numItemToShow = 6
+                val subsetMenuItems = index.take(numItemToShow).map{menuItems[it]}
+
+                setPopularItemsAdapter(subsetMenuItems)
+            }
+
+            private fun setPopularItemsAdapter(subsetMenuItems: List<MenuItem>) {
+                val adapter = MenuAdapter(subsetMenuItems, requireContext())
+                binding.PopularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+                binding.PopularRecyclerView.adapter = adapter
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("ERROR", "Database error: ${error.message}")
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,14 +117,5 @@ class HomeFragment : Fragment() {
                 Toast.makeText(requireContext(), itemMessage, Toast.LENGTH_SHORT).show()
             }
         })
-        val serviceName = listOf("Plumber","Carpenter","Electrician","Painter","Mechanic","Gardener")
-        val Price = listOf("100","200","300","400","500","600")
-        val popularServiceImages = listOf(R.drawable.plumber,R.drawable.carpenter,R.drawable.electrician,R.drawable.painter,R.drawable.mechanic,R.drawable.gardner)
-        val adapter = PopularAdapter(serviceName,Price,popularServiceImages,requireContext())
-        binding.PopularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.PopularRecyclerView.adapter = adapter
-    }
-    companion object{
-
     }
 }

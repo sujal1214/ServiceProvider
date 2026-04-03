@@ -39,6 +39,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginTop="5dp"
@@ -48,8 +49,7 @@
                 android:ems="10"
                 android:inputType="text"
                 android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="Sujal" />
+                android:paddingEnd="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,6 +77,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginTop="5dp"
@@ -86,8 +87,7 @@
                 android:ems="10"
                 android:inputType="textMultiLine"
                 android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="At pale kh. , post kolad, dist Raigad" />
+                android:paddingEnd="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,6 +115,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginTop="5dp"
@@ -124,8 +125,7 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="sujal@gmail.com" />
+                android:paddingEnd="5dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -154,6 +154,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginTop="5dp"
@@ -163,13 +164,12 @@
                 android:ems="10"
                 android:inputType="phone"
                 android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="1234567890" />
+                android:paddingEnd="5dp" />
         </LinearLayout>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button7"
+        android:id="@+id/saveInfoButton"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"

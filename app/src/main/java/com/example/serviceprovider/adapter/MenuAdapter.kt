@@ -8,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.example.serviceprovider.DetailsActivity2
 import com.example.serviceprovider.databinding.MenuItemBinding
 import com.example.serviceprovider.model.MenuItem
-import androidx.core.net.toUri
 
 class MenuAdapter(
-    private val menuItems:List<MenuItem>,
+    private val menuItems: List<MenuItem>,
     private val requireContext: Context
 ): RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
